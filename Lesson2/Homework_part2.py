@@ -1,7 +1,8 @@
 import random
-
-randomA = random.randint(1, 100);
-randomB = random.randint(1, 100);
+a = random.randint(1, 100);
+b=random.randint(1, 100);
+randomProd = a*b
+randomSum = a+b
 
 class Suma:
 
@@ -19,18 +20,38 @@ class Prod:
     def __init__(self,prod):
         self.prod = prod
 
-    def getNumbers(self, numbers):
+    def FirstStage(self, number):
+        prod_parts = []
 
-        for i in numbers:
+        for i in range(1, number + 1):
+            if (number % i == 0):
+                prod_parts.append(i)
 
-            if(i[0]*i[1] == self.prod):
+        self.prodParts = prod_parts;
 
-                return tuple([i[0],i[1]]);
+        return (len(prod_parts)>2)
+    def FindProd(self, combi):
 
-SumaScientist = Suma(randomA+randomB)
-ProdScientist = Prod(randomB*randomA)
-print(randomA,randomB)
-print("Sum is: ", randomB+randomA)
-print("Prod is: ", randomB*randomA)
-SumaKnowNumbers = SumaScientist.getAllCombinations()
-print(ProdScientist.getNumbers(SumaKnowNumbers))
+        for i in combi:
+            if(i[0]*i[1]==self.prod):
+                return i;
+def check_pairs(Prod_obj, combi):
+    true_combi = []
+    for i in combi:
+        if(Prod_obj.FirstStage(i[0]) and Prod_obj.FirstStage(i[1])):
+            true_combi.append(i);
+    return true_combi
+print("Prod is: ", randomProd)
+print("Sum is: ", randomSum)
+
+Prod_s = Prod(randomProd)
+Prod_s.FirstStage(randomProd)
+print("1st step: ",Prod_s.prodParts)
+Suma_s = Suma(randomSum)
+combi = Suma_s.getAllCombinations();
+
+print("2nd step: ",combi)
+combi = check_pairs(Prod_s,combi)
+print("3rd part: ", combi );
+
+print("Last step: ", Prod_s.FindProd(combi))
