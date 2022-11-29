@@ -2,7 +2,7 @@ import pandas as pd
 import  numpy as np
 
 import  NormalizeGPD
-import NormalizeEnergyDataset
+import EnergyDataFrameBuilder
 
 def Merge(df1,df2,df3,key):
 
@@ -15,7 +15,7 @@ def Merge(df1,df2,df3,key):
     return df5
 def getMergedFrames():
 
-    energy = NormalizeEnergyDataset.GetEnergy()
+    energy = EnergyDataFrameBuilder.GetEnergyDataFrame()
     GPD = NormalizeGPD.GetGPD()
     ScimEn = pd.read_excel("scimagojr country rank 1996-2021.xls");
     df =Merge(energy,GPD,ScimEn, "Country name")

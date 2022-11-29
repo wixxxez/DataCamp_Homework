@@ -53,7 +53,7 @@ class NormalizeEnergySupplyDecorator(Decorator):
         df = self._df.get_df();
         return self.normalizeEnergySupply(df);
 
-class normalizeEnergyPerCapitaDecorator(Decorator):
+class NormalizeEnergyPerCapitaDecorator(Decorator):
 
     def normalizeEnergySupplyPerCapita(self,df):
         index = 0;
@@ -129,14 +129,12 @@ def GetEnergy():
 
     energyDataFrame = EnergyDataFrame();
 
-    print(energyDataFrame.get_df())
-    #energy = pd.read_excel('Energy Indicators.xls', sheet_name="Energy", skiprows=16, usecols="C:F", nrows=228)
-    #energy = normalizeEnergySupply(energy)
-    #energy =RemoveNumbersFromCountryName(energy)
-    #energy = normalizeEnergySupplyPerCapita(energy)
-    #energy = RenameCountries(energy)
 
-    #energy = RemoveTextFromBracketsInCountryName(energy)
-    #return energy;
+    decorator1 = NormalizeEnergySupplyDecorator(energyDataFrame);
+    decorator2 = RemoveNumbersFromCountryNameDecorator(decorator1)
+    decorator3 = NormalizeEnergyPerCapitaDecorator(decorator2)
+    decorator4 = RenameCountriesDecorator(decorator3)
+    decorator5 = RemoveTextInBracketsFromCountryName(decorator4)
 
-GetEnergy()
+    return decorator5.get_df();
+
