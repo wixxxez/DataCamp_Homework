@@ -56,12 +56,27 @@ def answer_five():
 
     top15 = answer_one()
 
-    populations = [];
-    for i in range(len(top15)):
-        EnergySupply = top15.iloc[i]["Energy Supply"]
-        EnergySupplyPerCapita = top15.iloc[i]["Energy Supply per capita"];
-        populations.append(EnergySupply/EnergySupplyPerCapita)
-    top15["Populations"] = populations
+    top15 = HelpService.get_top15withPopulations(top15)
     top15 = top15.sort_values(by="Populations", ascending=False)
     return top15.iloc[2].name
 print(answer_five())
+
+def answer_six():
+
+    top15 = answer_one();
+    top15 = HelpService.get_top15withPopulations(top15)
+    CitableDocumentsPerCapita = []
+    for i in range(len(top15)):
+        CitableDocumentsPerCapita.append(top15.iloc[i]["Citable documents"]/top15.iloc[i]["Populations"])
+
+    top15["Citable documents per capita"] = CitableDocumentsPerCapita;
+
+    Populations = top15.Populations
+
+    corr_df = {
+        "Populations": Populations,
+        "Citable documents per capita": CitableDocumentsPerCapita
+    }
+
+    return pd.DataFrame(corr_df).corr(method='pearson').Populations[1]
+print(answer_six());
