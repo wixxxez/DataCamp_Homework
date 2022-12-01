@@ -50,4 +50,18 @@ def answer_four():
 
     return (top15.iloc[0].name, top15.iloc[0]["coef"])
 
-print(answer_four())
+#print(answer_four())
+
+def answer_five():
+
+    top15 = answer_one()
+
+    populations = [];
+    for i in range(len(top15)):
+        EnergySupply = top15.iloc[i]["Energy Supply"]
+        EnergySupplyPerCapita = top15.iloc[i]["Energy Supply per capita"];
+        populations.append(EnergySupply/EnergySupplyPerCapita)
+    top15["Populations"] = populations
+    top15 = top15.sort_values(by="Populations", ascending=False)
+    return top15.iloc[2].name
+print(answer_five())
