@@ -125,16 +125,4 @@ class RemoveTextInBracketsFromCountryName(Decorator):
         df = self._df.get_df()
         return self.RemoveTextFromBracketsInCountryName(df);
 
-def GetEnergy():
-
-    energyDataFrame = EnergyDataFrame();
-
-
-    decorator1 = NormalizeEnergySupplyDecorator(energyDataFrame);
-    decorator2 = RemoveNumbersFromCountryNameDecorator(decorator1)
-    decorator3 = NormalizeEnergyPerCapitaDecorator(decorator2)
-    decorator4 = RenameCountriesDecorator(decorator3)
-    decorator5 = RemoveTextInBracketsFromCountryName(decorator4)
-
-    return decorator5.get_df();
 
