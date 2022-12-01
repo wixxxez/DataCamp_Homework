@@ -12,8 +12,8 @@ def answer_one():
     return dataFrame
 
 df = answer_one()
-
-#print(df)
+print("---Answer One---")
+print(df)
 def answer_two():
 
     df = answer_one()
@@ -27,7 +27,8 @@ def answer_two():
 
     return avgGPD.sort_values(ascending=False)
 
-#print(answer_two())
+print("---Answer Two---")
+print(answer_two())
 
 def answer_three():
     top15 = answer_one()
@@ -38,7 +39,8 @@ def answer_three():
 
     return top15.loc[countryName]["2015"] - top15.loc[countryName]["2006"]
 
-#print(answer_three())
+print("---Answer Three---")
+print(answer_three())
 
 def answer_four():
     top15 = answer_one()
@@ -50,7 +52,8 @@ def answer_four():
 
     return (top15.iloc[0].name, top15.iloc[0]["coef"])
 
-#print(answer_four())
+print("---Answer Four---")
+print(answer_four())
 
 def answer_five():
 
@@ -59,6 +62,8 @@ def answer_five():
     top15 = HelpService.get_top15withPopulations(top15)
     top15 = top15.sort_values(by="Populations", ascending=False)
     return top15.iloc[2].name
+
+print("---Answer Five---")
 print(answer_five())
 
 def answer_six():
@@ -79,4 +84,43 @@ def answer_six():
     }
 
     return pd.DataFrame(corr_df).corr(method='pearson').Populations[1]
+
+def answer_seven():
+    #replace Iran with Poland
+    top15 = HelpService.get_top15withPopulations(top15=answer_one());
+    ContinentDict = {'China': 'Asia',
+                     'United States': 'North America',
+                     'Japan': 'Asia',
+                     'United Kingdom': 'Europe',
+                     'Russian Federation': 'Europe',
+                     'Canada': 'North America',
+                     'Germany': 'Europe',
+                     'India': 'Asia',
+                     'France': 'Europe',
+                     'South Korea': 'Asia',
+                     'Italy': 'Europe',
+                     'Spain': 'Europe',
+                     'Poland': 'Europe',
+                     'Australia': 'Australia',
+                     'Brazil': 'South America'}
+
+    Continent = HelpService.GetContinents(ContinentDict,top15);
+
+    df = pd.DataFrame(Continent, columns=["Continent","size", "Populations"])
+    size =HelpService.getSize(df)
+
+    sum = df.groupby("Continent").sum("Populations")
+    mean = df.groupby("Continent").mean("Populations")
+    std = HelpService.getStd(df);
+
+    MergeService = HelpService.MultipleMerge()
+    df = MergeService.merge(size,sum, "sum");
+    df = MergeService.merge(df,mean,"mean")
+    df = MergeService.merge(df,std,"std")
+    return df.set_index("Continent")
+
+print("---Answer Six---")
 print(answer_six());
+
+print("---Answer Seven---")
+print(answer_seven())
