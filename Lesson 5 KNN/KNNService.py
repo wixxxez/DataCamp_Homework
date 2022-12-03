@@ -104,3 +104,31 @@ class ShowPlot:
     def show(self):
 
         plt.show();
+
+    def plot_decision_boundary(self,x,y,model,**model_params):
+
+        plt.figure()
+        x_reduce = x[:,:2]
+
+        model.fit(x,y);
+        step_size = 0.02;
+        xMin, xMax = x_reduce[:, 0].min()-1, x_reduce[:,0].max()+1
+        yMin, yMax = x_reduce[:,1].min()-1, x_reduce[:, 1].max()+1
+
+        xx,yy = np.meshgrid(np.arange(xMin,xMax,step_size), np.arange(yMin,yMax,step_size));
+
+        model_predicted = model.predict(np.c_[xx.ravel(), yy.ravel()]);
+
+    def knnRegressorScoreVisualization(self, scores_train, scores_test, k_range ):
+        fig, ((ax1, ax2)) = plt.subplots(nrows=2, ncols=1, sharey=True)
+        plt.sca(ax1)
+        plt.ylabel('accuracy')
+        ax1.scatter(k_range, scores_train)
+        plt.sca(ax2)
+        plt.xlabel('k')
+        plt.ylabel('accuracy')
+        ax2.scatter(k_range, scores_test)
+        plt.xticks([0, 5, 10, 15, 20]);
+        fig.subplots_adjust(hspace=.4)  # set the vertical space
+        ax1.set_title('train set');
+        ax2.set_title('test set');
