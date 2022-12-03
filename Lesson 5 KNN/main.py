@@ -38,7 +38,7 @@ def Iris():
     print('The best k = {} , score = {}'.format(k_best, score_best))
     plotter.show()
 
-#Iris();
+Iris();
 
 def SyntheticDataset():
     X_D2, y_D2 = make_blobs(n_samples = 300, n_features = 2, centers = 8,
