@@ -50,7 +50,7 @@ class Linear_Regression_1():
         h_res = b+w * X
         # END_CODE
 
-        return h_res
+        return np.round(h_res,8)
 # DON'T_CHANGE_THIS_CODE. It is used to let you check the result is correct
 np.random.seed(2018)
 b_check= np.random.randn()
@@ -138,7 +138,7 @@ class Linear_Regression_3():
         dJ_w = (1/self.m) * np.sum((h_val-y) *X )
         # END_CODE
 
-        return (dJ_b, dJ_w)
+        return (round(dJ_b,5), round(dJ_w,5))
 
 # DON'T_CHANGE_THIS_CODE. It is used to let you check the result is correct
 np.random.seed(2020)
@@ -450,7 +450,7 @@ X_test_scaled= scaler.transform(X_test)
 print ('X_train.shape= ',X_train.shape)
 print ('y_train.shape= ',y_train.shape)
 print ('X_train= \n{}'.format (X_train[:5,:]))
-lin_reg = Linear_Regression(alpha= 0.001, verbose=True, eps=1e-8)
+lin_reg = Linear_Regression(alpha= 0.01, verbose=True, eps=1e-8)
 lin_reg.fit (X_train_scaled, y_train)
 lin_reg.draw_cost_changes()
 print("Expected output: ")
