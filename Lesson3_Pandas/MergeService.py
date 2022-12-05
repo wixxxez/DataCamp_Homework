@@ -8,6 +8,7 @@ def Merge(df1,df2,df3,key):
 
 
     df4 = pd.merge(df1,df2,on = key,)
+
     df5 = pd.merge(df3,df4, on = key)
     del df5["Region"]
     return df5
@@ -20,4 +21,5 @@ def getMergedFrames():
 
 
     return df.set_index("Country name").head(15)
+
 

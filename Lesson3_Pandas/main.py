@@ -86,7 +86,7 @@ def answer_six():
     return pd.DataFrame(corr_df).corr(method='pearson').Populations[1]
 
 def answer_seven():
-    #replace Iran with Poland
+
     top15 = HelpService.get_top15withPopulations(top15=answer_one());
     ContinentDict = {'China': 'Asia',
                      'United States': 'North America',
@@ -100,7 +100,7 @@ def answer_seven():
                      'South Korea': 'Asia',
                      'Italy': 'Europe',
                      'Spain': 'Europe',
-                     'Poland': 'Europe',
+                     'Iran': 'Asia',
                      'Australia': 'Australia',
                      'Brazil': 'South America'}
 

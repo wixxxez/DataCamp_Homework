@@ -78,7 +78,8 @@ class RenameCountriesDecorator(Decorator):
             "Republic of Korea": "South Korea",
             "United States of America": 'United States',
             'United Kingdom of Great Britain and Northern Ireland': 'United Kingdom',
-            'China, Hong Kong Special Administrative Region': 'Hong Kong'
+            'China, Hong Kong Special Administrative Region': 'Hong Kong',
+            'Iran ':'Iran'
         }
 
         index = 0
