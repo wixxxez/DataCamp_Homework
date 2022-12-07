@@ -38,6 +38,7 @@ print("3) The R-Square score of the model is ", np.round(mt.r2_score(y_test, y_p
 
 plt.scatter(y_pred,y_test)
 X = X.reshape(-1,1)
+
 plt.plot([min(X.tolist()), max(X.tolist())], [min(y_pred), max(y_pred)], color='red')
 plt.ylabel('value of house/1000($)')
 plt.xlabel('RM + LSTAT + PTRATIO')

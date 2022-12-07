@@ -4,14 +4,21 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler
 class DataSet:
 
-    def __init__(self, datasetfunc):
+    def __init__(self, datasetfunc, useOneF):
 
         dataset = datasetfunc()
         self.df = pd.DataFrame(dataset.data, columns=dataset.feature_names)
         x = dataset.data
+        if(useOneF):
+            x = x[:, np.newaxis, 2]
+            self.x = np.array(x).reshape(-1, 1)
+        else:
+            self.x = np.array(x).reshape(-1, 10)
+        #x = self.df[['bmi']]
         y = dataset.target
+        #
 
-        self.x = np.array(x).reshape(-1, 10)
+
 
         self.y = np.array(y).reshape(-1, 1)
 
