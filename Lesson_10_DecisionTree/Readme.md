@@ -11,3 +11,14 @@
 
 ![](img/DesTreeBound.png)
 
+# Random Forest
+    
+    depth = 7
+    train accuracy= 100.000%
+    test accuracy= 98.601%
+
+<h3>Decision Boundary</h3>
+
+![](img/DecRandom.png)
+
+![](img/DecRandom2.png)
