@@ -14,6 +14,7 @@ from sklearn.datasets import make_blobs
 from mlxtend.plotting import plot_decision_regions
 import  DecisionBoundary
 import Dataset
+from sklearn.tree import plot_tree
 os.environ["PATH"] += os.pathsep + r'C:\Program Files\Graphviz\bin'
 plot = PlotService.DecisionTreeVisualizeService()
 
@@ -61,6 +62,13 @@ class RandomForestBreastCancer():
             plot_decision_regions(X_test, y_test.to_numpy(), clf=clf,
                                   filler_feature_values=feature_values, )
             plt.title("Decision Boundary")
+
+        fig = plt.figure(figsize=(15, 10))
+        plot_tree(clf.estimators_[0],
+                  feature_names=features,
+                  class_names=labels,
+                  filled=True, impurity=True,
+                  rounded=True)
         plt.show()
 
 dataset = Dataset.DataSet()

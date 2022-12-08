@@ -16,6 +16,9 @@
     depth = 7
     train accuracy= 100.000%
     test accuracy= 98.601%
+<h3>Decision Tree</h3>
+
+![](img/rft.png)
 
 <h3>Decision Boundary</h3>
 
@@ -27,7 +30,7 @@
     train accuracy= 98.826%
     test accuracy= 95.804%
 
-<h3>Decision Tree</h3>
+<h3>Decision Boundary</h3>
 
 ![](img/Screenshot_2.png)
 
