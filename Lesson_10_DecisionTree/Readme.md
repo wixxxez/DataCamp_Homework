@@ -22,3 +22,12 @@
 ![](img/DecRandom.png)
 
 ![](img/DecRandom2.png)
+
+# Gradient Boosting
+    train accuracy= 98.826%
+    test accuracy= 95.804%
+
+<h3>Decision Tree</h3>
+
+![](img/Screenshot_2.png)
+

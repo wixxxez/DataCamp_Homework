@@ -55,6 +55,7 @@ def plot_decision_boundary_universal(clf, X_train, y_train, X_test=None, y_test=
         print(
             'Calling to predict for all grid values (precision of drawing = {},\n you may configure to speed up e.g. precision=0.05)'.format(
                 precision))
+
     Z = clf.predict(target_samples_grid)
 
     # Reshape the result to original meshgrid shape
