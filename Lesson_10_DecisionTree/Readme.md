@@ -31,3 +31,11 @@
 
 ![](img/Screenshot_2.png)
 
+# XGBoost
+
+    train accuracy= 100.000%
+    test accuracy= 98.601%
+
+<h3>Decision Boundary</h3>
+
+![](img/xgb.png)
