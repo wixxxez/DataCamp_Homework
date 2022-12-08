@@ -10,7 +10,7 @@ from sklearn import metrics as mt
 X,y = load_boston(return_X_y=True);
 
 df = pd.DataFrame (X, columns= ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT'])
-X = df[[ 'RM', 'LSTAT']]
+X = df[[ 'RM' , 'LSTAT']]
 X = np.array(X).reshape(-1,2)
 y = np.array(y).reshape(-1,1)
 
@@ -36,6 +36,12 @@ print("1) The model explains,", np.round(mt.explained_variance_score(y_test, y_p
 print("2) The Mean Absolute Error of model is:", np.round(mt.mean_absolute_error(y_test, y_pred), 2))
 print("3) The R-Square score of the model is ", np.round(mt.r2_score(y_test, y_pred), 2))
 
+#One feature way to visualization
+#plt.figure()
+#plt.scatter(x_test, y_test, color="black")
+#plt.plot(x_test, y_pred, color='blue', linewidth=3)
+
+plt.figure()
 plt.scatter(y_pred,y_test)
 X = X.reshape(-1,1)
 
