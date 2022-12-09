@@ -60,8 +60,10 @@ def answer_five():
     top15 = answer_one()
 
     top15 = HelpService.get_top15withPopulations(top15)
-    top15 = top15.sort_values(by="Populations", ascending=False)
-    return top15.iloc[2].name
+
+    top215 = top15.sort_values(by="Populations", ascending=False)
+
+    return top215.iloc[2].name
 
 print("---Answer Five---")
 print(answer_five())
@@ -76,14 +78,14 @@ def answer_six():
 
     top15["Citable documents per capita"] = CitableDocumentsPerCapita;
 
-    Populations = top15.Populations
+    Populations = top15['Energy Supply per capita']
 
     corr_df = {
-        "Populations": Populations,
+        "Energy Supply per capita": Populations,
         "Citable documents per capita": CitableDocumentsPerCapita
     }
 
-    return pd.DataFrame(corr_df).corr(method='pearson').Populations[1]
+    return pd.DataFrame(corr_df).corr(method='pearson')['Citable documents per capita'][0]
 
 def answer_seven():
 

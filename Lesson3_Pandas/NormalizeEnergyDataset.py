@@ -46,6 +46,8 @@ class NormalizeEnergySupplyDecorator(Decorator):
                 i = i * 1000000
                 df.loc[index, "Energy Supply"] = i
             index += 1;
+
+
         return df;
 
     def get_df(self):
@@ -58,12 +60,12 @@ class NormalizeEnergyPerCapitaDecorator(Decorator):
     def normalizeEnergySupplyPerCapita(self,df):
         index = 0;
         for i in df["Energy Supply per capita"]:
-            if i == "Petajoules":
-                print("Convert Petajoules to Gigajoules procces ")
-                pass
-            elif i == "...":
+
+            if i == "...":
                 df.loc[index, "Energy Supply per capita"] = np.NaN
+
             index += 1;
+
         return df;
 
     def get_df(self):
@@ -88,6 +90,7 @@ class RenameCountriesDecorator(Decorator):
                 df.loc[index, "Country name"] = ContruiesDict[i]
             index += 1
 
+
         return df
 
     def get_df(self):
@@ -99,13 +102,13 @@ class RemoveNumbersFromCountryNameDecorator(Decorator):
 
     def RemoveNumbersFromCountryName(self,df):
         index = 0
+
         for name in df['Country name']:
             if type(name) != float:
                 newname = ''.join([i for i in name if not i.isdigit()])
                 df.loc[index, "Country name"] = newname;
-                index += 1
-
-        return df;
+            index += 1
+        return df
 
     def get_df(self):
         df = self._df.get_df()
@@ -116,8 +119,9 @@ class RemoveTextInBracketsFromCountryName(Decorator):
     def RemoveTextFromBracketsInCountryName(self, df):
         index = 0;
         for name in df['Country name']:
-            name = re.sub("\(.*?\)", "", name)
-            df.loc[index, "Country name"] = name
+            if(type(name) != float):
+                name = re.sub("\(.*?\)", "", name)
+                df.loc[index, "Country name"] = name
             index += 1
         return df
 

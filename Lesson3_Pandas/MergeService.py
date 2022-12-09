@@ -19,7 +19,6 @@ def getMergedFrames():
     ScimEn = pd.read_excel("scimagojr country rank 1996-2021.xls");
     df =Merge(energy,GPD,ScimEn, "Country name")
 
-
     return df.set_index("Country name").head(15)
 
 
