@@ -197,7 +197,7 @@ def preprocess(content, vocab):
     # convert to binary array of features
     tokens_represented = represent_features(tokens,vocab)
     # END_CODE
-    print(len(tokens_represented))
+
 
     return tokens_represented
 
