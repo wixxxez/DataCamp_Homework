@@ -3,7 +3,7 @@ import numpy as np
 import KNNService
 from sklearn.datasets import make_blobs
 import matplotlib.pyplot as plt
-from sklearn.neighbors import KNeighborsRegressor
+from sklearn.neighbors import KNeighborsClassifier
 from matplotlib.colors import ListedColormap
 from sklearn.preprocessing import MinMaxScaler
 from mlxtend.plotting import plot_decision_regions
@@ -26,7 +26,7 @@ class RegressorTrain:
         scores_test = []
         accuracy = []
         for k in k_range:
-            knn = KNeighborsRegressor(n_neighbors=k)
+            knn = KNeighborsClassifier(n_neighbors=k)
             knn.fit(self.x_train, self.y_train)
             scores_train.append(knn.score(self.x_train, self.y_train))
             scores_test.append(knn.score(self.x_train, self.y_test))
@@ -47,7 +47,7 @@ class RegressorTrain:
         scores_test = []
         accuracy = []
         for k in k_range:
-            knn = KNeighborsRegressor(n_neighbors=k)
+            knn = KNeighborsClassifier(n_neighbors=k)
             knn.fit(x_train_scaled, self.y_train)
             scores_train.append(knn.score(x_train_scaled, self.y_train))
             scores_test.append(knn.score(x_test_scaled, self.y_test))
