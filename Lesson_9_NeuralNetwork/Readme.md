@@ -1,7 +1,7 @@
-# Train test set 
+# Train set 
 
 ![](img/Train_set.png)
 
-# Train test prediction 
+# Test prediction 
 
 ![](img/Test_set_prediction.png)
