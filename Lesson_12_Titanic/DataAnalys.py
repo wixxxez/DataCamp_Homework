@@ -34,12 +34,11 @@ def VisualizeDependency(df, x, y):
 def VisualizeY(df,y):
     plt.figure()
     sns.barplot(y=y, data=df)
-printInfo(titanic.getTrainData())
-printInfo(titanic.getTestData())
 
-#VisualizeDependency(titanic.getTrainData(), "Survived" , "Survived" )
-print(titanic.getTrainData().isna())
-VisualizeCorrMatrix(titanic.getTrainData().set_index('PassengerId'))
-plt.show()
+
+def checkNAN(df):
+
+    return df.isnull().sum()
+
 
 
