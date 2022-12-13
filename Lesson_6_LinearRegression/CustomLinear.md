@@ -12,3 +12,6 @@
 # Scaled Data
 ![](img/Screenshot_9.png)
 ![](img/Screenshot_10.png)
+
+    R2 Score = 0.5922469604178708
+    b: 22.355527899999995, w= [[-6.4487427]]
