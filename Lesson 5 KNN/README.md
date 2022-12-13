@@ -11,6 +11,7 @@ Visualize K for scaled data
 
 ![](img/Screenshot_2.png)
 
+    The best k = 15 , score = 97.36842105263158
 # Sythetic Dataset
 
 Visualize k for test and train 
@@ -20,3 +21,5 @@ Visualize k for test and train
 Visualize decision boundary
 
 ![](img/Screenshot_4.png)
+
+    The best k = 9 , score = 92.0
