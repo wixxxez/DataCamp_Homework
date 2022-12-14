@@ -1,5 +1,5 @@
 import pandas as pd
-
+from sklearn.model_selection import  train_test_split
 
 class Dataset():
 
@@ -29,6 +29,9 @@ class Dataset():
 
         return self.train[['Survived']];
 
+    def getSplitedData(self, X,y):
+
+        return  train_test_split(X,y);
     def GetFeatures(self):
         features = ['Fare',
                     'Embarked',
@@ -36,6 +39,8 @@ class Dataset():
                     'Sex',
                     'Age',
                     'Parch',
-                    'SibSp']
+                    'SibSp',
+                    'Name']
 
         return features;
+

@@ -3,7 +3,7 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 import Dataset
 
-titanic = Dataset.Dataset()
+
 
 def printInfo(df):
 
@@ -39,6 +39,7 @@ def VisualizeY(df,y):
 def checkNAN(df):
 
     return df.isnull().sum()
+
 
 
 

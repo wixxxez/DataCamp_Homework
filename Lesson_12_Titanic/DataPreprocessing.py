@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import Dataset
 import DataAnalys
-
+import matplotlib.pyplot as plt
 
 def FillAge(df):
 
@@ -22,6 +22,25 @@ def changeEmbarkedToNumericValues(df):
     df['Embarked'] = df['Embarked'].replace(['C'], 1)
     df['Embarked'] = df['Embarked'].replace(['Q'], 2)
 
+
+def getFamilyLen(df):
+    df['FamilySize'] = df['SibSp'] + df['Parch']
+
+    return df
+
+def formatNames(df):
+        df.Name = df.Name.str.extract('\, ([A-Z][^ ]*\.)', expand=False)
+
+        df["Name"].fillna('Mr', inplace=True)
+
+        return df;
+
+def changeNamesToNumericValues(df):
+
+    names = df["Name"].value_counts()
+    names = {v: k for k, v in enumerate(names.keys())}
+    df["Name"] = df["Name"].apply(lambda x: names[x]);
+    return df;
 def preprocessing(df):
 
     features = Dataset.Dataset().GetFeatures();
@@ -31,14 +50,17 @@ def preprocessing(df):
     FillEmbarked(df)
     changeSexToNumericValues(df)
     changeEmbarkedToNumericValues(df)
-
+    df = getFamilyLen(df)
+    df = formatNames(df)
+    df = changeNamesToNumericValues(df)
     return df;
 
 
 titanic = Dataset.Dataset()
-
-X_train = titanic.getXTrain()
-Y_train = titanic.getYTrain()
-X_train= preprocessing(X_train)
-print(X_train.info())
-print(DataAnalys.checkNAN(X_train))
+x = titanic.getTrainData()
+x = getFamilyLen(x)
+DataAnalys.printInfo(x)
+x = formatNames(x)
+x = changeNamesToNumericValues(x)
+#DataAnalys.VisualizeDependency(x, 'Name', "Survived")
+#plt.show()
