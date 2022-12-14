@@ -101,6 +101,6 @@
 
 Виберемо GradientBoost i RandomForest
 
-
+Підвищення <a href="up_model_accuracy.md">  точності моделі </a>
 
 
