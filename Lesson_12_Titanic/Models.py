@@ -48,18 +48,29 @@ def GradientBoost(x_train, y_train, x_test, y_test):
 
 def RandomForest(x_train, y_train, x_test, y_test):
 
-    for max_depth in range(5,11,1):
-        clf = RandomForestClassifier(
-            criterion='entropy',
-            random_state=10,
-            max_depth=max_depth,
-            n_estimators=150,
-        ).fit(x_train, y_train.to_numpy().ravel())
-        print("Depth: ", max_depth)
-        #print("Learning rate: ", learning_rate)
-        print("train accuracy= {:.3%}".format(clf.score(x_train, y_train)))
-        print("test accuracy= {:.3%}".format(clf.score(x_test, y_test)))
+    bestdepth = [7,8,9,10]
+    models = []
+    model_accuracy = []
+    for i in range(10):
 
+        for max_depth in bestdepth:
+            clf = RandomForestClassifier(
+                criterion='entropy',
+                random_state=10,
+                max_depth=max_depth,
+                n_estimators=150,
+            ).fit(x_train, y_train.to_numpy().ravel())
+            print("Depth: ", max_depth)
+            #print("Learning rate: ", learning_rate)
+            print("train accuracy= {:.3%}".format(clf.score(x_train, y_train)))
+            score = clf.score(x_test, y_test)
+            print("test accuracy= {:.3%}".format(score))
+            models.append(clf)
+            model_accuracy.append(score)
+
+    print(max(model_accuracy), model_accuracy.index(max(model_accuracy)))
+
+    return models[model_accuracy.index(max(model_accuracy))]
 def XGBoost(x_train, y_train, x_test, y_test):
 
     clf = XGBClassifier(use_label_encoder=False, eval_metric='logloss')
@@ -67,11 +78,25 @@ def XGBoost(x_train, y_train, x_test, y_test):
     print("train accuracy= {:.3%}".format(clf.score(x_train, y_train)))
     print("test accuracy= {:.3%}".format(clf.score(x_test, y_test)))
 
+def Predict(clf, x):
+    x_v = DataPreprocessing.preprocessing(x)
+
+    return clf.predict(x_v)
+
+def createSubmission(x,y):
+    x_validate["Survived"] = y
+    sumbission = x_validate["Survived"]
+    sumbission.to_csv('submission.csv')
 scaler = MinMaxScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
 #DecisionTree(x_train, y_train, x_test, y_test);
 #GradientBoost(x_train, y_train, x_test, y_test)
 
-RandomForest(x_train, y_train, x_test, y_test)
+clf = RandomForest(x_train, y_train, x_test, y_test)
+print(clf)
+x_validate = dataset.getTestData()
+y_pred = Predict(clf, x_validate)
+createSubmission(x_validate,y_pred)
+
 #XGBoost(x_train, y_train, x_test, y_test)

@@ -41,6 +41,8 @@ def changeNamesToNumericValues(df):
     names = {v: k for k, v in enumerate(names.keys())}
     df["Name"] = df["Name"].apply(lambda x: names[x]);
     return df;
+def FillFare(df):
+    df['Fare'].fillna(df['Fare'].mean(), inplace=True)
 def preprocessing(df):
 
     features = Dataset.Dataset().GetFeatures();
@@ -48,6 +50,7 @@ def preprocessing(df):
     df = df[features]
     FillAge(df)
     FillEmbarked(df)
+    FillFare(df)
     changeSexToNumericValues(df)
     changeEmbarkedToNumericValues(df)
     df = getFamilyLen(df)
