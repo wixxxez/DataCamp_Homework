@@ -46,7 +46,7 @@ def GradientBoost(x_train, y_train, x_test, y_test):
             print("train accuracy= {:.3%}".format(clf.score(x_train, y_train)))
             print("test accuracy= {:.3%}".format(clf.score(x_test, y_test)))
 
-def RandomForest(x_train, y_train, x_test, y_test):
+def RandomForest(x_train, y_train, x_test = None, y_test = None):
 
     bestdepth = [7,8,9,10]
     models = []
@@ -59,12 +59,13 @@ def RandomForest(x_train, y_train, x_test, y_test):
                 random_state=10,
                 max_depth=max_depth,
                 n_estimators=150,
+                ccp_alpha=0.01
             ).fit(x_train, y_train.to_numpy().ravel())
             print("Depth: ", max_depth)
             #print("Learning rate: ", learning_rate)
             print("train accuracy= {:.3%}".format(clf.score(x_train, y_train)))
-            score = clf.score(x_test, y_test)
-            print("test accuracy= {:.3%}".format(score))
+            score = clf.score(x_train, y_train)
+            #print("test accuracy= {:.3%}".format(score))
             models.append(clf)
             model_accuracy.append(score)
 
@@ -87,13 +88,14 @@ def createSubmission(x,y):
     x_validate["Survived"] = y
     sumbission = x_validate["Survived"]
     sumbission.to_csv('submission.csv')
+
 scaler = MinMaxScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.transform(x_test)
 #DecisionTree(x_train, y_train, x_test, y_test);
 #GradientBoost(x_train, y_train, x_test, y_test)
 
-clf = RandomForest(x_train, y_train, x_test, y_test)
+clf = RandomForest(X, Y)
 print(clf)
 x_validate = dataset.getTestData()
 y_pred = Predict(clf, x_validate)
