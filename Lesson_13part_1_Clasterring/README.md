@@ -24,5 +24,6 @@ Output
     6.125479438197845
 
 <a href="Sklearn_clustering.md"> See also my Sklearn solutions </a>
+<br>
 <a href="Iris.md"> See also my Kmeans for Iris solutions </a>
 
