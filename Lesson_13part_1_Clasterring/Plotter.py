@@ -4,8 +4,12 @@ import  numpy as np
 colors = np.array(['green', 'orange', 'purple', 'brown','red'])
 
 def plot_centroids(centroids):
-    for i, c in enumerate (centroids.to_numpy()):
-        plt.plot(c[0], c[1], marker = 'x', color= colors[i], markersize=20, linewidth= 25)
+    try:
+        for i, c in enumerate (centroids.to_numpy()):
+            plt.plot(c[0], c[1], marker = 'x', color= colors[i], markersize=20, linewidth= 25)
+    except AttributeError:
+        for i, c in enumerate (centroids):
+            plt.plot(c[0], c[1], marker = 'x', color= colors[i], markersize=20, linewidth= 25)
 
 def draw_state(x,y, centroids = None, closest_centroids = None):
     plt.figure ()

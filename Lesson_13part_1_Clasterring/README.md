@@ -22,3 +22,6 @@ Output
     99
     Lowest cost
     6.125479438197845
+
+<a href="Sklearn_clustering.md"> See also my Sklearn solutions </a>
+
