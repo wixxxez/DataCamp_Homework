@@ -35,6 +35,14 @@ def formatNames(df):
 
         return df;
 
+def PinAge(df):
+
+    df = df.mask(df['Age'] <= 5, 0)
+    #df = df.mask((df['Age'] >= 16) & (df["Age"]<= 30), 70)
+
+
+
+    return df;
 def changeNamesToNumericValues(df):
 
     names = df["Name"].value_counts()
@@ -56,14 +64,14 @@ def preprocessing(df):
     df = getFamilyLen(df)
     df = formatNames(df)
     df = changeNamesToNumericValues(df)
+    df = PinAge(df)
     return df;
 
 
-titanic = Dataset.Dataset()
-x = titanic.getTrainData()
-x = getFamilyLen(x)
-DataAnalys.printInfo(x)
-x = formatNames(x)
-x = changeNamesToNumericValues(x)
+#titanic = Dataset.Dataset()
+
+#x = titanic.getTrainData()
+#x = preprocessing(x)
+#PinAge(x)
 #DataAnalys.VisualizeDependency(x, 'Name', "Survived")
 #plt.show()
