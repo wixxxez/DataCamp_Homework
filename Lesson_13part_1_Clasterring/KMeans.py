@@ -73,7 +73,7 @@ def centroid_assignation(df, centroids):
 
 def kmeans(dset, k=2, tol=1e-4):
 
-    # Let us work in a copy, so we don't mess the original
+
     working_dset = pd.DataFrame(dset, columns=['x', 'y'])
     # We define some variables to hold the error, the
     # stopping signal and a counter for the iterations
