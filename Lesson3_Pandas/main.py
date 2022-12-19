@@ -46,7 +46,7 @@ def answer_four():
     top15 = answer_one()
     coef = []
     for i in range(len(top15)):
-        coef.append(top15.iloc[i]["Citations"] / top15.iloc[i]["Self-citations"])
+        coef.append(top15.iloc[i]["Self-citations"] / top15.iloc[i]["Citations"])
     top15['coef'] = coef
     top15 = top15.sort_values(by="coef", ascending=False)
 
@@ -72,20 +72,15 @@ def answer_six():
 
     top15 = answer_one();
     top15 = HelpService.get_top15withPopulations(top15)
-    CitableDocumentsPerCapita = []
-    for i in range(len(top15)):
-        CitableDocumentsPerCapita.append(top15.iloc[i]["Citable documents"]/top15.iloc[i]["Populations"])
 
-    top15["Citable documents per capita"] = CitableDocumentsPerCapita;
-
-    Populations = top15['Energy Supply per capita']
+    Populations = top15.Populations
 
     corr_df = {
-        "Energy Supply per capita": Populations,
-        "Citable documents per capita": CitableDocumentsPerCapita
+        "Populations": Populations,
+        "Citable documents per capita": top15["Citable documents"]
     }
 
-    return pd.DataFrame(corr_df).corr(method='pearson')['Citable documents per capita'][0]
+    return pd.DataFrame(corr_df).corr(method='pearson').Populations[1]
 
 def answer_seven():
 
