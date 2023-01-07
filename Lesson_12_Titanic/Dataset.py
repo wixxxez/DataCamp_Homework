@@ -33,14 +33,17 @@ class Dataset():
 
         return  train_test_split(X,y);
     def GetFeatures(self):
-        features = ['Fare',
+        features = ['Pclass',
                     'Embarked',
-                    'Pclass',
+                    'Fare',
                     'Sex',
                     'Age',
                     'Parch',
                     'SibSp',
-                    'Name']
+                    'Name',
+                    'Cabin',
+                    'Ticket',
+                    ]
 
         return features;
 

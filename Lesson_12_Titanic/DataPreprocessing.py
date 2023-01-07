@@ -8,10 +8,12 @@ def FillAge(df):
 
     df['Age'].fillna(df['Age'].mean(), inplace=True)
 
+    df["Age"] = df['Age'].apply(lambda x: x*100 if x < 1 else x )
+
 def changeSexToNumericValues(df):
 
-    df['Sex'] = df['Sex'].replace(['male'], 0)
-    df['Sex'] = df['Sex'].replace(['female'], 1)
+    df['Sex'] = df['Sex'].replace(['male'], 1)
+    df['Sex'] = df['Sex'].replace(['female'], 0)
 
 def FillEmbarked(df):
 
@@ -32,6 +34,10 @@ def formatNames(df):
         df.Name = df.Name.str.extract('\, ([A-Z][^ ]*\.)', expand=False)
 
         df["Name"].fillna('Mr', inplace=True)
+        names = ["Mr.","Miss.","Mrs.","Master."]
+        def f(x):
+            return x if x in names else "Other"
+        df["Name"]=df["Name"].apply(lambda x: f(x))
 
         return df;
 
@@ -49,13 +55,34 @@ def changeNamesToNumericValues(df):
     names = {v: k for k, v in enumerate(names.keys())}
     df["Name"] = df["Name"].apply(lambda x: names[x]);
     return df;
+
+def preprocesCabin(df):
+
+    df["Cabin"] = df["Cabin"].fillna("Other")
+
+    df["Cabin"] =  df["Cabin"].apply(lambda x: str(x)[0])
+    names = df["Cabin"].value_counts()
+    names = {v: k for k, v in enumerate(names.keys())}
+    df["Cabin"] = df["Cabin"].apply(lambda x: names[x]);
+
+
+    return df
+def preprocessTicket(df):
+    df["Ticket"] = df["Ticket"].apply(lambda x: str(x)[0])
+    names = df["Ticket"].value_counts()
+    names = {v: k for k, v in enumerate(names.keys())}
+    df["Ticket"] = df["Ticket"].apply(lambda x: names[x]);
+    return df
+
 def FillFare(df):
     df['Fare'].fillna(df['Fare'].mean(), inplace=True)
 def preprocessing(df):
 
+
     features = Dataset.Dataset().GetFeatures();
     # Expecting only 10 features without "Survived", PassengerId should be index;
     df = df[features]
+
     FillAge(df)
     FillEmbarked(df)
     FillFare(df)
@@ -65,6 +92,12 @@ def preprocessing(df):
     df = formatNames(df)
     df = changeNamesToNumericValues(df)
     df = PinAge(df)
+
+    df = preprocesCabin(df)
+    df = preprocessTicket(df)
+    #DataAnalys.VisualizeDependency(dff, "Cabin", "Survived")
+    #plt.show()
+    print(df.columns)
     return df;
 
 

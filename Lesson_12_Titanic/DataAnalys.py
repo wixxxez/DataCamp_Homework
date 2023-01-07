@@ -22,7 +22,7 @@ def VisualizeCorrMatrix(df):
     heatmap.set(xlabel = "X values", ylabel="Survive",title= "CorrelationMatrix")
 
 def VisualizeDependency(df, x, y):
-    plt.figure()
+    #plt.figure()
     sns.barplot(x=x, y=y, data=df)
     plt.title("Barplot {}".format(x))
     plt.get_current_fig_manager().canvas.set_window_title("Barplot {}".format(x))
@@ -39,6 +39,11 @@ def VisualizeY(df,y):
 def checkNAN(df):
 
     return df.isnull().sum()
+
+
+dt = Dataset.Dataset()
+X = dt.getTrainData()
+
 
 
 
