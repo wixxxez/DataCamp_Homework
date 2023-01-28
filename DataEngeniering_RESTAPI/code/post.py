@@ -10,5 +10,5 @@ user_data = {
 }
 
 
-r = requests.post("http://127.0.0.1:5000/api/add_record", json=user_data, headers=headers)
+r = requests.post("http://127.0.0.1:80/api/add_record", json=user_data, headers=headers)
 print(r.text)

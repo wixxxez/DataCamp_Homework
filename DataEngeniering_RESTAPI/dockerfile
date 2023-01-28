@@ -1,0 +1,13 @@
+FROM ubuntu
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3.5 \
+    python3-pip \
+    && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/
+COPY /code ./code
+WORKDIR /code
+RUN pip install -r req.txt
+CMD ["python3", "app.py"]
+EXPOSE 8080
